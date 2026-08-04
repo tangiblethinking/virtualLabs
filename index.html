@@ -152,22 +152,23 @@
             <h3 class="text-2xl font-bold mb-6">Evolution of the Interface</h3>
             <p class="mb-6 text-gray-600 dark:text-gray-400">Interactive comparison: Wireframe vs. High-Fidelity Render. Drag the slider to compare.</p>
             
-            <div class="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden group select-none shadow-xl border border-gray-200 dark:border-gray-800 bg-gray-800">
+            <div class="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden group select-none shadow-xl border border-gray-200 dark:border-gray-800 bg-gray-200 dark:bg-gray-800">
                 
-                <!-- Support for Images or Video Placeholders -->
                 <!-- AFTER State (Background) -->
-                <div class="absolute inset-0 w-full h-full flex items-center justify-center bg-darkSurface text-white text-xl font-semibold">
-                    <img 
-    src="http://www.edtechroundup.org/uploads/2/6/5/7/2657242/8941485.jpg" 
-    alt="Frog Dissection Virtual Lab" 
-    class="absolute inset-0 w-full h-full object-cover object-left-top"
->
-                </div>
+                <!-- USING IMAGES (.jpg) -->
+                <img src="src/after.jpg" alt="Final High Fidelity UI" class="absolute inset-0 w-full h-full object-cover object-left-top">
                 
+                <!-- IF USING VIDEOS (.mp4), delete the <img> tag above and uncomment the <video> tag below -->
+                <!-- <video src="src/after.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover object-left-top"></video> -->
+
+
                 <!-- BEFORE State (Foreground clipping) -->
-                <div id="before-img" class="absolute inset-0 w-full h-full flex items-center justify-center bg-gray-200 text-gray-800 text-xl font-semibold border-r-4 border-primary shadow-[10px_0_15px_rgba(0,0,0,0.2)]" style="clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);">
-                    [WIREFRAME / STRUCTURAL MOCKUP HERE]
-                </div>
+                <!-- USING IMAGES (.jpg) -->
+                <img id="before-img" src="src/before.jpg" alt="Wireframe Structural Mockup" class="absolute inset-0 w-full h-full object-cover object-left-top border-r-4 border-primary shadow-[10px_0_15px_rgba(0,0,0,0.2)]" style="clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);">
+                
+                <!-- IF USING VIDEOS (.mp4), delete the <img> tag above and uncomment the <video> tag below -->
+                <!-- <video id="before-img" src="src/before.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover object-left-top border-r-4 border-primary shadow-[10px_0_15px_rgba(0,0,0,0.2)]" style="clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);"></video> -->
+
                 
                 <!-- Range Slider Overlay -->
                 <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10" id="media-slider">
