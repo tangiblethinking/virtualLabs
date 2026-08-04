@@ -1,0 +1,66 @@
+/* Custom Animations and Overrides */
+
+/* Scrollbar styling for a cleaner tech aesthetic */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+    background: #475569;
+}
+
+/* Hide scrollbar for tab containers */
+.custom-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.custom-scrollbar {
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+}
+
+/* Fade in animation for tabs */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Scroll Reveal Classes */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, visibility;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Accordion Smooth Height Transition */
+.accordion-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease-out;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+}
+.accordion.open .accordion-content {
+    grid-template-rows: 1fr;
+    padding-top: 0;
+    padding-bottom: 1.25rem; /* pb-5 equivalent */
+    opacity: 1;
+}
+.accordion-content > p {
+    overflow: hidden;
+}

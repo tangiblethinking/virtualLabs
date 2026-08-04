@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX Case Study: Odysseyware Virtual Science Labs</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        darkBg: '#0f172a',
+                        darkSurface: '#1e293b'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-darkBg dark:text-gray-100 transition-colors duration-300 font-sans antialiased">
+
+    <!-- Progress Bar -->
+    <div id="progress-container" class="fixed top-0 left-0 w-full h-1.5 z-50 bg-gray-200 dark:bg-gray-800">
+        <div id="progress-bar" class="h-full bg-primary w-0 transition-all duration-150 ease-out"></div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="fixed top-6 right-6 z-50 p-3 rounded-full bg-white dark:bg-darkSurface shadow-lg hover:shadow-xl transition-all outline-none">
+        <svg id="moon-icon" class="w-5 h-5 hidden dark:block text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"/></svg>
+        <svg id="sun-icon" class="w-5 h-5 block dark:hidden text-gray-800" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+    </button>
+
+    <!-- Dot Navigation -->
+    <nav class="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden md:flex flex-col gap-4">
+        <a href="#hero" class="dot-nav group relative w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all hover:bg-primary active" data-target="hero">
+            <span class="absolute right-6 top-1/2 -translate-y-1/2 px-3 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none">Overview</span>
+        </a>
+        <a href="#context" class="dot-nav group relative w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all hover:bg-primary" data-target="context">
+            <span class="absolute right-6 top-1/2 -translate-y-1/2 px-3 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none">Role & Scope</span>
+        </a>
+        <a href="#challenges" class="dot-nav group relative w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all hover:bg-primary" data-target="challenges">
+            <span class="absolute right-6 top-1/2 -translate-y-1/2 px-3 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none">Constraints</span>
+        </a>
+        <a href="#process" class="dot-nav group relative w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all hover:bg-primary" data-target="process">
+            <span class="absolute right-6 top-1/2 -translate-y-1/2 px-3 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none">Process & Flow</span>
+        </a>
+        <a href="#outcomes" class="dot-nav group relative w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all hover:bg-primary" data-target="outcomes">
+            <span class="absolute right-6 top-1/2 -translate-y-1/2 px-3 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none">Outcomes & Reflection</span>
+        </a>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-6 pb-24">
+        
+        <!-- Section 1: Hero -->
+        <section id="hero" class="min-h-screen flex flex-col justify-center pt-20 reveal">
+            <h3 class="text-primary font-semibold tracking-wider uppercase mb-4">UX Case Study</h3>
+            <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">Odysseyware Virtual Science Labs</h1>
+            <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mb-12">Translating physical classrooms into intuitive digital experiences. Bridging the gap between tactile science experiments and scalable LMS architecture.</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-gray-200 dark:border-gray-700 pt-8">
+                <div>
+                    <h4 class="text-sm text-gray-500 dark:text-gray-400 uppercase">Role</h4>
+                    <p class="font-semibold mt-1">Sr. UX Designer</p>
+                </div>
+                <div>
+                    <h4 class="text-sm text-gray-500 dark:text-gray-400 uppercase">Timeline</h4>
+                    <p class="font-semibold mt-1">2014 &ndash; 2016</p>
+                </div>
+                <div>
+                    <h4 class="text-sm text-gray-500 dark:text-gray-400 uppercase">Platform</h4>
+                    <p class="font-semibold mt-1">Web / Mobile Responsive</p>
+                </div>
+                <div>
+                    <h4 class="text-sm text-gray-500 dark:text-gray-400 uppercase">Deliverable</h4>
+                    <p class="font-semibold mt-1">End-to-End Product Design</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Context & Scope -->
+        <section id="context" class="py-24 reveal">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">Project Context & Scope</h2>
+            <div class="bg-white dark:bg-darkSurface p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+                <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
+                    Odysseyware required a modern, scalable solution to bring 20 high-fidelity virtual science labs (covering subjects from Osmosis and Circuitry to Frog Dissection) into their existing ecosystem. 
+                </p>
+                <h3 class="text-xl font-semibold mb-3">Team & Leadership</h3>
+                <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-6">
+                    I led end-to-end design, directing a team of junior designers while establishing tight cross-functional alignment with Subject Matter Experts (SMEs), Instructional Designers, Curriculum Writers, QA engineers, and the VP of Product. 
+                </p>
+                <h3 class="text-xl font-semibold mb-3">My Scope</h3>
+                <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                    My responsibilities spanned from initial problem/solution alignment and Information Architecture (IA) to detailed wireframes, UI specifications, and delivering fully functional prototypes ready for the engineering handoff.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 3: Challenges & Constraints (Accordions) -->
+        <section id="challenges" class="py-24 reveal">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">Challenges & Constraints</h2>
+            <div class="space-y-4">
+                
+                <!-- Accordion Item 1 -->
+                <div class="accordion bg-white dark:bg-darkSurface rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <button class="accordion-header w-full text-left px-6 py-5 font-semibold text-xl flex justify-between items-center outline-none">
+                        <span>Translating Physical to Digital</span>
+                        <svg class="w-5 h-5 transform transition-transform duration-300 icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content px-6 pb-5 text-gray-600 dark:text-gray-300 hidden">
+                        <p>The core challenge was recreating real-world, hands-on labs (e.g., frog dissections, mechanical physics) in a way that felt authentic to a classroom setting. The digital interface needed to be highly intuitive and engaging for students in varying grades, without abstracting away the learning objectives of the physical experiment.</p>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 2 -->
+                <div class="accordion bg-white dark:bg-darkSurface rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <button class="accordion-header w-full text-left px-6 py-5 font-semibold text-xl flex justify-between items-center outline-none">
+                        <span>Managing Cognitive Load</span>
+                        <svg class="w-5 h-5 transform transition-transform duration-300 icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content px-6 pb-5 text-gray-600 dark:text-gray-300 hidden">
+                        <p>Leveraging behavioral UX principles like Hick's Law, I designed the interface strictly from a student’s curious perspective, paired with instructor oversight. It was critical that students weren't overwhelmed by competing UI elements—toolsets, simulation mechanics, anatomy overlays, and educational text had to be progressively disclosed.</p>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 3 -->
+                <div class="accordion bg-white dark:bg-darkSurface rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <button class="accordion-header w-full text-left px-6 py-5 font-semibold text-xl flex justify-between items-center outline-none">
+                        <span>Technical & LMS Constraints</span>
+                        <svg class="w-5 h-5 transform transition-transform duration-300 icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content px-6 pb-5 text-gray-600 dark:text-gray-300 hidden">
+                        <p>The solution required responsive and reactive layouts to render flawlessly across desktop and mobile devices. Additionally, strict constraints imposed by the Odysseyware LMS framework required complex user states: authentication protocols, audit trails, and specific checks and balances to validate accurate interactions for both students and teachers.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Media Placeholder / Interactive Slider -->
+        <section class="py-12 reveal">
+            <h3 class="text-2xl font-bold mb-6">Evolution of the Interface</h3>
+            <p class="mb-6 text-gray-600 dark:text-gray-400">Interactive comparison: Wireframe vs. High-Fidelity Render. Drag the slider to compare.</p>
+            
+            <div class="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden group select-none shadow-xl border border-gray-200 dark:border-gray-800 bg-gray-800">
+                
+                <!-- Support for Images or Video Placeholders -->
+                <!-- AFTER State (Background) -->
+                <div class="absolute inset-0 w-full h-full flex items-center justify-center bg-darkSurface text-white text-xl font-semibold">
+                    [FINAL UI / HIGH-FIDELITY RENDER .MOV OR .JPG HERE]
+                </div>
+                
+                <!-- BEFORE State (Foreground clipping) -->
+                <div id="before-img" class="absolute inset-0 w-full h-full flex items-center justify-center bg-gray-200 text-gray-800 text-xl font-semibold border-r-4 border-primary shadow-[10px_0_15px_rgba(0,0,0,0.2)]" style="clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);">
+                    [WIREFRAME / STRUCTURAL MOCKUP HERE]
+                </div>
+                
+                <!-- Range Slider Overlay -->
+                <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-10" id="media-slider">
+                
+                <!-- Slider Handle Visual -->
+                <div id="slider-line" class="absolute top-0 bottom-0 left-[50%] w-1 bg-white pointer-events-none flex items-center justify-center transform -translate-x-1/2 shadow-[0_0_10px_rgba(0,0,0,0.5)] z-20">
+                    <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg">
+                        <svg class="w-4 h-4 text-primary transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Process & Flow (Tabs) -->
+        <section id="process" class="py-24 reveal">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">Design Process & Solutions</h2>
+            
+            <div class="bg-white dark:bg-darkSurface rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden">
+                <!-- Tab Headers -->
+                <div class="flex border-b border-gray-200 dark:border-gray-700 overflow-x-auto custom-scrollbar">
+                    <button class="tab-btn active px-6 py-4 font-semibold text-primary border-b-2 border-primary whitespace-nowrap outline-none" data-tab="ia">Information Architecture</button>
+                    <button class="tab-btn px-6 py-4 font-semibold text-gray-500 dark:text-gray-400 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 transition-colors whitespace-nowrap outline-none" data-tab="features">Key Feature UX</button>
+                    <button class="tab-btn px-6 py-4 font-semibold text-gray-500 dark:text-gray-400 border-b-2 border-transparent hover:text-gray-800 dark:hover:text-gray-200 transition-colors whitespace-nowrap outline-none" data-tab="testing">Testing & Iteration</button>
+                </div>
+                
+                <!-- Tab Content -->
+                <div class="p-8 min-h-[250px]">
+                    <!-- Panel 1 -->
+                    <div id="ia" class="tab-content active animate-fade-in">
+                        <h3 class="text-2xl font-bold mb-4">Structuring the Student Journey</h3>
+                        <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                            The ecosystem required a seamless transition logic. I architected user flows where a student would intuitively navigate from a standard lesson module directly into a virtual lab environment, perform the experiential task, and transition flawlessly into built-in assessments. The architecture supported repeating virtual labs asynchronously as needed for study or remediation.
+                        </p>
+                    </div>
+                    
+                    <!-- Panel 2 -->
+                    <div id="features" class="tab-content hidden animate-fade-in">
+                        <h3 class="text-2xl font-bold mb-4">Interaction Paradigms</h3>
+                        <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                            Creating realism without physical touch required specific interaction models. I designed UX logic to incorporate precision clicking/drag-and-drop mechanics for biological dissections, real-time reactive data tracking UI for physics labs, and persistent, immediate feedback loops for progress tracking so students always understood their context within the experiment.
+                        </p>
+                    </div>
+                    
+                    <!-- Panel 3 -->
+                    <div id="testing" class="tab-content hidden animate-fade-in">
+                        <h3 class="text-2xl font-bold mb-4">Validating with the Classroom</h3>
+                        <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                            I led cross-functional workshops and conducted direct usability testing with actual target students, while consulting real classroom science teachers as subject matter experts. The major UX pivots and interface refinements we executed prior to launch were directly informed by observing how students naturally interpreted (or misinterpreted) digital tools compared to physical ones.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Outcomes & Reflection -->
+        <section id="outcomes" class="py-24 border-t border-gray-200 dark:border-gray-800 reveal">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">Outcomes & Reflections</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-primary">The Reception</h3>
+                    <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                        Upon release, the UX was received with overwhelming enthusiasm by educators and students alike. The success of the initial 20 modules validated the architectural approach, driving executive buy-in for further expansion and the commissioning of new virtual science content.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-primary">Addressing the Cracks</h3>
+                    <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        Post-launch observation is where true UX maturity is tested. Public industry reviews (like the EdTech Roundup article) highlighted real-world friction points, such as software bugs from complex environments and workflow disconnects where quizzes tested materials out of sync with the lab steps.
+                    </p>
+                    <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                        I utilized these edge cases proactively. I addressed them through stakeholder interviews, rigorous follow-up retrospectives, and an open-feedback loop policy. This operationalized the critique, driving continuous UI/UX improvements and showcasing how senior leadership must evolve a product beyond its initial V1 release.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS Logic -->
+    <script src="js/scripts.js"></script>
+</body>
+</html>
