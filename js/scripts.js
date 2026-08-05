@@ -49,9 +49,22 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.observe(reveal);
     });
 
-    // --- Dot Navigation Active State Tracking ---
+    // --- Dot Navigation Active State Tracking + Smooth Scroll ---
     const sections = document.querySelectorAll('section');
     const navDots = document.querySelectorAll('.dot-nav');
+
+    // Intercept clicks so the <base href="/vlabs/"> does not cause a 404 navigation.
+    // Use data-target + scrollIntoView for reliable same-page anchoring.
+    navDots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = dot.getAttribute('data-target');
+            const target = document.getElementById(targetId);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
 
     const navObserverOptions = {
         threshold: 0.5
