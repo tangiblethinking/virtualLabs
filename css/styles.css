@@ -64,3 +64,36 @@
 .accordion-content > p {
     overflow: hidden;
 }
+
+/* --- Dot Navigation: always visible, blue when active, grey otherwise --- */
+.dot-nav {
+    display: block;
+    width: 0.75rem;   /* w-3 */
+    height: 0.75rem;
+    border-radius: 9999px;
+    background-color: #d1d5db; /* gray-300 */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+    opacity: 1 !important;
+    visibility: visible !important;
+    flex-shrink: 0;
+}
+.dark .dot-nav {
+    background-color: #4b5563; /* gray-600 */
+}
+.dot-nav:hover {
+    background-color: #93c5fd; /* lighter blue on hover */
+    transform: scale(1.25);
+}
+.dot-nav.active {
+    background-color: #3b82f6 !important; /* primary blue */
+    transform: scale(1.15);
+}
+
+/* Progress bar interactive */
+#progress-container {
+    cursor: pointer;
+}
+#progress-container:hover #progress-bar {
+    filter: brightness(1.1);
+}

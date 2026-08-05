@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Dark Mode Toggle ---
     const themeToggle = document.getElementById('theme-toggle');
     const htmlElement = document.documentElement;
-    const moonIcon = document.getElementById('moon-icon');
-    const sunIcon = document.getElementById('sun-icon');
 
     // Check local storage or system preference
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -22,14 +20,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Scroll Progress Bar ---
+    // --- Scroll Progress Bar (visual + interactive) ---
     const progressBar = document.getElementById('progress-bar');
-    window.addEventListener('scroll', () => {
+    const progressContainer = document.getElementById('progress-container');
+
+    function updateProgressBar() {
         const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
+        const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
         progressBar.style.width = scrolled + "%";
-    });
+    }
+
+    window.addEventListener('scroll', updateProgressBar);
+    updateProgressBar();
+
+    // Click progress bar to jump to that scroll position
+    if (progressContainer) {
+        progressContainer.addEventListener('click', (e) => {
+            const rect = progressContainer.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const percentage = Math.max(0, Math.min(1, clickX / rect.width));
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            window.scrollTo({
+                top: percentage * scrollHeight,
+                behavior: 'smooth'
+            });
+        });
+    }
 
     // --- Scroll Reveal Animations ---
     const reveals = document.querySelectorAll('.reveal');
@@ -49,12 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.observe(reveal);
     });
 
-    // --- Dot Navigation Active State Tracking + Smooth Scroll ---
-    const sections = document.querySelectorAll('section');
+    // --- Dot Navigation: always visible, blue = active section, grey = inactive ---
+    const sections = document.querySelectorAll('section[id]');
     const navDots = document.querySelectorAll('.dot-nav');
 
-    // Intercept clicks so the <base href="/vlabs/"> does not cause a 404 navigation.
-    // Use data-target + scrollIntoView for reliable same-page anchoring.
+    // Click → smooth scroll to section (avoids base-href 404)
     navDots.forEach(dot => {
         dot.addEventListener('click', (e) => {
             e.preventDefault();
@@ -66,31 +82,78 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const navObserverOptions = {
-        threshold: 0.5
-    };
-
-    const navObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const targetId = entry.target.getAttribute('id');
-                navDots.forEach(dot => {
-                    dot.classList.remove('active', 'bg-primary');
-                    if(dot.classList.contains('dark:bg-gray-600')) {
-                        dot.classList.add('bg-gray-300'); // reset
-                    }
-                    if (dot.getAttribute('data-target') === targetId) {
-                        dot.classList.add('active', 'bg-primary');
-                        dot.classList.remove('bg-gray-300', 'dark:bg-gray-600');
-                    }
-                });
+    // Helper: set only the matching dot to active (CSS handles blue/grey)
+    function setActiveDot(targetId) {
+        navDots.forEach(dot => {
+            if (dot.getAttribute('data-target') === targetId) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
             }
         });
+    }
+
+    // Track which section is most visible and update dots
+    const navObserverOptions = {
+        threshold: [0.25, 0.5, 0.75],
+        rootMargin: "-10% 0px -10% 0px"
+    };
+
+    let currentActiveId = null;
+
+    const navObserver = new IntersectionObserver((entries) => {
+        // Prefer the entry with the highest intersection ratio that is intersecting
+        let best = null;
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (!best || entry.intersectionRatio > best.intersectionRatio) {
+                    best = entry;
+                }
+            }
+        });
+        if (best) {
+            const targetId = best.target.getAttribute('id');
+            if (targetId && targetId !== currentActiveId) {
+                currentActiveId = targetId;
+                setActiveDot(targetId);
+            }
+        }
     }, navObserverOptions);
 
     sections.forEach(section => {
         navObserver.observe(section);
     });
+
+    // Also update active dot on scroll end / initial load via scroll position
+    // (covers cases where observer alone is ambiguous between sections)
+    function updateActiveDotFromScroll() {
+        const scrollPos = window.scrollY + window.innerHeight * 0.35;
+        let activeSection = null;
+        sections.forEach(section => {
+            const top = section.offsetTop;
+            const bottom = top + section.offsetHeight;
+            if (scrollPos >= top && scrollPos < bottom) {
+                activeSection = section;
+            }
+        });
+        // Fallback: last section if near bottom
+        if (!activeSection && sections.length) {
+            const last = sections[sections.length - 1];
+            if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 50) {
+                activeSection = last;
+            }
+        }
+        if (activeSection) {
+            const id = activeSection.getAttribute('id');
+            if (id && id !== currentActiveId) {
+                currentActiveId = id;
+                setActiveDot(id);
+            }
+        }
+    }
+
+    window.addEventListener('scroll', updateActiveDotFromScroll, { passive: true });
+    updateActiveDotFromScroll();
 
     // --- Accordion Logic ---
     const accordions = document.querySelectorAll('.accordion');

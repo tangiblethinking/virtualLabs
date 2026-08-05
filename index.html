@@ -34,7 +34,7 @@
 <body class="bg-gray-50 text-gray-900 dark:bg-darkBg dark:text-gray-100 transition-colors duration-300 font-sans antialiased">
 
     <!-- Progress Bar -->
-    <div id="progress-container" class="fixed top-0 left-0 w-full h-1.5 z-50 bg-gray-200 dark:bg-gray-800">
+    <div id="progress-container" class="fixed top-0 left-0 w-full h-1.5 z-50 bg-gray-200 dark:bg-gray-800 cursor-pointer" title="Click to jump to position">
         <div id="progress-bar" class="h-full bg-primary w-0 transition-all duration-150 ease-out"></div>
     </div>
 
@@ -45,20 +45,20 @@
     </button>
 
     <!-- Dot Navigation -->
-    <nav class="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden md:flex flex-col gap-4">
-        <a href="#hero" class="dot-nav group relative w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all hover:bg-primary active" data-target="hero">
+    <nav class="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden md:flex flex-col gap-4" aria-label="Section navigation">
+        <a href="#hero" class="dot-nav group relative active" data-target="hero" aria-label="Overview">
             <span class="absolute right-6 top-1/2 -translate-y-1/2 px-3 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none">Overview</span>
         </a>
-        <a href="#context" class="dot-nav group relative w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all hover:bg-primary" data-target="context">
+        <a href="#context" class="dot-nav group relative" data-target="context" aria-label="Role & Scope">
             <span class="absolute right-6 top-1/2 -translate-y-1/2 px-3 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none">Role & Scope</span>
         </a>
-        <a href="#challenges" class="dot-nav group relative w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all hover:bg-primary" data-target="challenges">
+        <a href="#challenges" class="dot-nav group relative" data-target="challenges" aria-label="Constraints">
             <span class="absolute right-6 top-1/2 -translate-y-1/2 px-3 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none">Constraints</span>
         </a>
-        <a href="#process" class="dot-nav group relative w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all hover:bg-primary" data-target="process">
+        <a href="#process" class="dot-nav group relative" data-target="process" aria-label="Process & Flow">
             <span class="absolute right-6 top-1/2 -translate-y-1/2 px-3 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none">Process & Flow</span>
         </a>
-        <a href="#outcomes" class="dot-nav group relative w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all hover:bg-primary" data-target="outcomes">
+        <a href="#outcomes" class="dot-nav group relative" data-target="outcomes" aria-label="Outcomes & Reflection">
             <span class="absolute right-6 top-1/2 -translate-y-1/2 px-3 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none">Outcomes & Reflection</span>
         </a>
     </nav>
